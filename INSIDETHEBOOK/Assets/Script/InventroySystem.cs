@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -19,7 +20,7 @@ public class InventorySystem : MonoBehaviour
     private GameObject whatSlotToEquip;
 
     public bool isOpen;
-    public bool isFull;
+    //public bool isFull;
 
 
     private void Awake()
@@ -38,7 +39,6 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         isOpen = false;
-
         PopulateSlotList();
     }
 
@@ -80,20 +80,57 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    //public void AddToInventory(string itemName)
-    //{
+    public void AddToInventory(string itemName)
+    {
+        whatSlotToEquip = FindNextEmptySlot();
+        itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
+        itemToAdd.transform.SetParent(whatSlotToEquip.transform);
+        itemList.Add(itemName);       
+    }
 
-    //    if (CheckIfFull())
-    //    {
-    //        Debug.Log("the inventory is full");
+    public bool CheckIfFull()
+    {
+        return false;
+        
+        //throw new NotImplementedException();
+    }
 
-    //    }
-    //    else
-    //    {
+    private GameObject FindNextEmptySlot()
+    {
+        //throw new NotImplementedException();
 
+        foreach(GameObject slot in slotList)
+        {
+            if (slot.transform.childCount == 0)
+            {
+                return slot;
 
-    //    }
-    //}
+            }      
 
+        }
+        return new GameObject();
 
+    }
+
+    private bool CheckIffull()
+    {
+        int counter = 0;
+
+        foreach (GameObject slot in slotList)
+        {
+            if (slot.transform.childCount> 0)
+            {
+                counter += 1;
+
+            }           
+        }
+        if (counter == 9)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

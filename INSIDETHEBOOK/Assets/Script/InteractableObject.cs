@@ -13,16 +13,24 @@ public class InteractableObject : MonoBehaviour
         return ItemName;
     }
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Mouse0))
-    //    {
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && playerInRange && SelectionManager.Instance.onTarget)
+        {
+            if (!InventorySystem.Instance.CheckIfFull())
+            {
+                InventorySystem.Instance.AddToInventory(ItemName);
+                Destroy(gameObject);
 
-    //        InventorySystem.Instance.AddToInventory(ItemName);
+            }
+            else
+            {
+                Debug.Log("PUNO NA INVENTORY!!");
 
-    //        Destroy(gameObject);
-    //    }   
-    //}
+            }
+
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

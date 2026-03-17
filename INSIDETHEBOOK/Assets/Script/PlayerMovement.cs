@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance {  get; private set; }
+    public GameObject playerBody;
+
+    private void Awake()
+    {
+        Instance =this;
+    }
     public CharacterController controller;
 
     public float speed = 12f;

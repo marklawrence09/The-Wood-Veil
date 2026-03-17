@@ -88,12 +88,7 @@ public class InventorySystem : MonoBehaviour
         itemList.Add(itemName);       
     }
 
-    public bool CheckIfFull()
-    {
-        return false;
-        
-        //throw new NotImplementedException();
-    }
+    //public bool CheckIfFull => false;
 
     private GameObject FindNextEmptySlot()
     {
@@ -112,8 +107,9 @@ public class InventorySystem : MonoBehaviour
 
     }
 
-    private bool CheckIffull()
+    public bool CheckIfFull()
     {
+        
         int counter = 0;
 
         foreach (GameObject slot in slotList)
@@ -124,7 +120,7 @@ public class InventorySystem : MonoBehaviour
 
             }           
         }
-        if (counter == 9)
+        if (counter == slotList.Count)
         {
             return true;
         }
